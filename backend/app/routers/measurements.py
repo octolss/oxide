@@ -41,6 +41,13 @@ class DeviceCreate(BaseModel):
     mac_address: str
     device_name: str
 
+class MeasurementInput(BaseModel):
+    deviceId: str
+    co2: int
+    temperature: float
+    humidity: float
+    uptimeMs: int
+
 @router.post("/receive", response_model=MeasurementResponse)
 async def receive_measurement(data: MeasurementReceive):
     """Receive measurement from ESP32/Arduino"""
@@ -76,4 +83,16 @@ async def add_device(
         device_data.mac_address,
         device_data.device_name,
         current_user["user_id"]
+    )
+
+@router.post("/add-measurement", response_model=dict)
+async def add_measurement(data: MeasurementInput):
+    """Add a new measurement to the database."""
+    return await receive_measurement_controller(
+        mac_address=data.deviceId,
+        temperature=data.temperature,
+        humidity=data.humidity,
+        co2=data.co2,
+        oxygen=None,
+        particles=None
     )
