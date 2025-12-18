@@ -1,0 +1,115 @@
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+}
+
+.dashboard-header {
+  background: var(--accent-gradient);
+  color: white;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 20px var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-content {
+  display: flex;
+  flex: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.sidebar {
+  width: 320px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px var(--shadow);
+  height: fit-content;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.btn-add-device {
+  width: 100%;
+  padding: 0.875rem;
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(91, 110, 255, 0.3);
+}
+
+.btn-add-device:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(91, 110, 255, 0.4);
+}
+
+.btn-add-device:active {
+  transform: translateY(0);
+}
+
+.main-content {
+  flex: 1;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px var(--shadow);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+}
+
+.empty-state h2 {
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .dashboard-content {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .sidebar {
+    width: 100%;
+  }
+}

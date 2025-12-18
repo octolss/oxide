@@ -1,0 +1,8 @@
+tunnel: 3118f3da-e327-49f5-b0f9-2f98d6177f85
+credentials-file: /etc/cloudflared/3118f3da-e327-49f5-b0f9-2f98d6177f85.json
+ingress:
+  - hostname: oxide-level.id.lv
+    service: http://frontend:80
+  - service: http_status:404
+
+

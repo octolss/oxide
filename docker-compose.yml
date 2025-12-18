@@ -1,0 +1,48 @@
+
+services:
+  # Backend - FastAPI Python application
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: iot-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_KEY=${SUPABASE_SERVICE_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+      - IOT_TOKEN=${IOT_TOKEN}
+    restart: unless-stopped
+    networks:
+      - iot-network
+
+  # Frontend - React + Vite served by Nginx
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: iot-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - iot-network
+
+  # Cloudflare Tunnel - exposes backend to the internet
+  tunnel:
+    build:
+      context: ./.cloudfared
+      dockerfile: Dockerfile
+    container_name: cloudflare-tunnel
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - iot-network
+
+networks:
+  iot-network:
+    driver: bridge
